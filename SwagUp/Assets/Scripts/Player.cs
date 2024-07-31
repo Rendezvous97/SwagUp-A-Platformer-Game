@@ -1,19 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    private CapsuleCollider2D cd;
 
+    private bool canBeControlled = false;
 
     [Header("Movement")]
     [SerializeField] private float jumpForce;
     [SerializeField] private float doubleJumpForce;
     [SerializeField] private float moveSpeed;
+    private float defaultGravityScale;
     private bool canDoubleJump;
+
+    [Header("VFX")]
+    [SerializeField] private GameObject deathVfx;
 
     [Header("Buffer & Coyote Jump")]
     [SerializeField] private float bufferJumpWindow = .25f;
@@ -50,13 +57,22 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        cd = GetComponent<CapsuleCollider2D>();
         anim = GetComponentInChildren<Animator>();
 
+    }
+
+    private void Start() {
+        defaultGravityScale = rb.gravityScale;
+        RespawnFinished(false);
     }
 
     private void Update()
     {
         UpdateAirborneStatus();
+
+        if(canBeControlled == false)
+            return;
 
         if(isKnocked)
             return;
@@ -67,6 +83,24 @@ public class Player : MonoBehaviour
         handleFlip();
         handleCollisions();
         handleAnimations();
+    }
+
+    public void RespawnFinished(bool finished)
+    {
+        float gravityScale = defaultGravityScale;
+
+        if(finished)
+        {
+            rb.gravityScale = gravityScale;
+            canBeControlled = true;
+            cd.enabled = true;
+        }
+        else
+        {
+            rb.gravityScale = 0;
+            canBeControlled = false;
+            cd.enabled = false;
+        }
     }
 
     public void Knockback()
@@ -84,6 +118,13 @@ public class Player : MonoBehaviour
         isKnocked = true;
         yield return new WaitForSeconds(knockbackDuration);
         isKnocked = false;
+    }
+
+
+    public void Die()
+    {
+        GameObject newDeathVfx = Instantiate(deathVfx, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
     private void UpdateAirborneStatus()
