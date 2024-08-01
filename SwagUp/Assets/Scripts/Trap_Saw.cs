@@ -9,8 +9,10 @@ public class Trap_Saw : MonoBehaviour
     [SerializeField] private float moveSpeed = 3;
     [SerializeField] private Transform[] wayPoint;
     [SerializeField] private float cooldown = 1;
-
+    
+    private Vector3[] wayPointPositions;
     public int wayPointIndex = 1;
+    public int moveDirection = 1;
     private bool canMove = true;
 
     private void Awake() {
@@ -18,8 +20,20 @@ public class Trap_Saw : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
-    private void Start() {
-        transform.position = wayPoint[0].position;
+    private void Start()
+    {
+        UpdateWayPointInfo();
+        transform.position = wayPointPositions[0];;
+    }
+
+    private void UpdateWayPointInfo()
+    {
+        wayPointPositions = new Vector3[wayPoint.Length];
+
+        for (int i = 0; i < wayPoint.Length; i++)
+        {
+            wayPointPositions[i] = wayPoint[i].position;
+        }
     }
 
     private void Update() {
@@ -30,19 +44,17 @@ public class Trap_Saw : MonoBehaviour
             return;
 
 
-        transform.position = Vector2.MoveTowards(transform.position, wayPoint[wayPointIndex].position, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, wayPointPositions[wayPointIndex], moveSpeed * Time.deltaTime);
 
-        if(Vector2.Distance(transform.position, wayPoint[wayPointIndex].position) < .1f)
+        if(Vector2.Distance(transform.position, wayPointPositions[wayPointIndex]) < .1f)
         {
-            wayPointIndex++;
-            sr.flipX = !sr.flipX;
-
-            if(wayPointIndex >= wayPoint.Length)
+            if ((wayPointIndex == wayPointPositions.Length - 1) || wayPointIndex ==0)
             {
-                wayPointIndex = 0;
+                moveDirection *= -1;
                 StartCoroutine(StopMovement(cooldown));
             }
-
+            
+            wayPointIndex = wayPointIndex + moveDirection;
         }
     }
 
@@ -51,6 +63,7 @@ public class Trap_Saw : MonoBehaviour
         canMove = false;
         yield return new WaitForSeconds(delay);
         canMove = true;
+        sr.flipX = !sr.flipX;
     }
 
 }
