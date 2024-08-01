@@ -116,8 +116,10 @@ public class Player : MonoBehaviour
     private IEnumerator KnockbackRoutine()
     {
         isKnocked = true;
+        anim.SetBool("isKnocked", isKnocked);
         yield return new WaitForSeconds(knockbackDuration);
         isKnocked = false;
+        anim.SetBool("isKnocked", isKnocked);
     }
 
 
