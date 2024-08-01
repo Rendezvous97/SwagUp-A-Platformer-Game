@@ -72,7 +72,12 @@ public class Player : MonoBehaviour
         UpdateAirborneStatus();
 
         if(canBeControlled == false)
+        {
+            handleCollisions();
+            handleAnimations();
             return;
+        }
+            
 
         if(isKnocked)
             return;
@@ -132,6 +137,21 @@ public class Player : MonoBehaviour
     {
         GameObject newDeathVfx = Instantiate(deathVfx, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    public void Push(Vector2 direction, float duration = 0)
+    {
+        StartCoroutine(PushCoRoutine(direction, duration));
+    }
+
+    private IEnumerator PushCoRoutine(Vector2 direction, float duration)
+    {
+        canBeControlled = false;
+        rb.velocity = Vector2.zero;
+        rb.AddForce(direction, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(duration);
+        canBeControlled = true;
     }
 
     private void UpdateAirborneStatus()
