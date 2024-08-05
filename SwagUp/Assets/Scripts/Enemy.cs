@@ -10,7 +10,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] protected Transform player;
     [SerializeField] protected GameObject damageTrigger;
-    [Space]
+    
+    [Header("General Info")]
     [SerializeField] protected float moveSpeed = 2f;
     [SerializeField] protected float idleDuration = 1.5f;
     protected float idleTimer;
@@ -56,7 +57,6 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update() {
         idleTimer -= Time.deltaTime;
-        
         if(isDead)
             HandleDeathRotation();
     }
@@ -66,7 +66,8 @@ public class Enemy : MonoBehaviour
         col.enabled = false;
         damageTrigger.SetActive(false);
         anim.SetTrigger("hit");
-        rb.velocity = new Vector2(rb.velocity.x, deathImpactSpeed);
+        // rb.velocity = new Vector2(rb.velocity.x, deathImpactSpeed);
+        rb.velocity = new Vector2(0, deathImpactSpeed);
         isDead = true;
 
         if(Random.Range(0, 100) < 50)

@@ -6,9 +6,12 @@ public class Enemy_Chicken : Enemy
 {
     [Header("Chicken Details")]
     [SerializeField] private float aggroDuration;
-    private float aggroTimer;
-    [SerializeField] private bool playerDetected;
     [SerializeField] private float detectionRange;
+
+    private float aggroTimer;
+    private bool playerDetected;
+    private bool canFlip = true;
+    
     
 
     protected override void Update()
@@ -52,10 +55,32 @@ public class Enemy_Chicken : Enemy
     {
         if(canMove == false)
             return;
+        
+        handleFlip(player.transform.position.x);
 
-        handleFlip(player.position.x);
         rb.velocity = new Vector2(moveSpeed * facingDir, rb.velocity.y);
  
+    }
+
+    protected override void Flip()
+    {
+        base.Flip();
+        canFlip = true;
+    }
+
+    protected override void handleFlip(float xValue)
+    {
+        if(canMove == false)
+            return;
+            
+        if ((xValue < transform.position.x && facingRight) || (xValue > transform.position.x && !facingRight))
+        {
+            if(canFlip)
+            {
+                canFlip = false;
+                Invoke(nameof(Flip), .3f);
+            }
+        }
     }
 
     protected override void handleCollisions()
