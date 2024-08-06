@@ -96,7 +96,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0036149025, y: -0.40962172}
+  m_Offset: {x: 0.0036149025, y: -0.5803373}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -107,7 +107,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6457129, y: 1.3297911}
+  m_Size: {x: 1.6457129, y: 0.9883599}
   m_EdgeRadius: 0
 --- !u!114 &1779589639432289538
 MonoBehaviour:
@@ -244,15 +244,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46e9b386d9c91402fb52e17da68c3445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTrigger: {fileID: 1407927740342910724}
-  moveSpeed: 2
+  moveSpeed: 3
   idleDuration: 1.5
-  idleTimer: 0
   groundCheckDistance: 1.1
   wallCheckDistance: 0.9
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  playerDetectionDistance: 15
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 0
   groundCheck: {fileID: 5475518231810054297}
   deathImpactSpeed: 4
   deathRotationSpeed: 150
