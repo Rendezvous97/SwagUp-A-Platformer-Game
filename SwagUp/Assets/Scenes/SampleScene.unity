@@ -9736,6 +9736,63 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1001 &1147428428
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 539036621914551734, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.967126
+      objectReference: {fileID: 0}
+    - target: {fileID: 539036621914551734, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.825717
+      objectReference: {fileID: 0}
+    - target: {fileID: 539036621914551734, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 539036621914551734, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 539036621914551734, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 539036621914551734, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 539036621914551734, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 539036621914551734, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 539036621914551734, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 539036621914551734, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536883404323750008, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
+      propertyPath: m_Name
+      value: Trap_SpikedBall
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c61fe512992684d2dae937d2366bde9e, type: 3}
 --- !u!1 &1272912767
 GameObject:
   m_ObjectHideFlags: 0
@@ -20832,3 +20889,4 @@ SceneRoots:
   - {fileID: 6904563566697661520}
   - {fileID: 4872593777144889545}
   - {fileID: 1688623923}
+  - {fileID: 1147428428}
